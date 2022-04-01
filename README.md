@@ -1,2 +1,0 @@
-# RNkinipoisk
-kinipoisk app

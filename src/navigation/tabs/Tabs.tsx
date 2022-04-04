@@ -8,6 +8,10 @@ import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import MediaScreen from '../../screens/MediaScreen/MediaScreen';
 import {IconSvgTabHome} from '../../assets/Icons/IconSvgTabHome';
 import {IconSvgTabMedia} from '../../assets/Icons/IconSvgTabMedia';
+import SearchScreen from '../../screens/SearchScreen/SearchScreen';
+import ProfileScreen from '../../screens/ProfileScreen/ProfileScreen';
+import {IconSvgTabProfile} from '../../assets/Icons/IconSvgTabProfile';
+import {IconSvgTabSearch} from '../../assets/Icons/IconSvgTabSearch';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +20,8 @@ export const Tabs = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveBackgroundColor: Colors.warm_grey,
-        tabBarInactiveBackgroundColor: Colors.warm_grey,
+        tabBarActiveBackgroundColor: Colors.black_30,
+        tabBarInactiveBackgroundColor: Colors.black_30,
         tabBarShowLabel: false,
       }}
       initialRouteName={Navigation.initialRoute}>
@@ -29,7 +33,7 @@ export const Tabs = () => {
           tabBarLabel: 'Главная',
           tabBarIcon: ({focused}) => (
             <IconSvgTabHome
-              color={focused ? Colors.coral : Colors.black}
+              color={focused ? Colors.coral : Colors.black_87}
               size={25}
             />
           ),
@@ -44,7 +48,35 @@ export const Tabs = () => {
           tabBarLabel: 'Медиа',
           tabBarIcon: ({focused}) => (
             <IconSvgTabMedia
-              color={focused ? Colors.coral : Colors.black}
+              color={focused ? Colors.coral : Colors.black_87}
+              size={25}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={screens.SEARCH}
+        component={SearchScreen}
+        options={{
+          tabBarActiveTintColor: Colors.black,
+          tabBarLabel: 'Поиск',
+          tabBarIcon: ({focused}) => (
+            <IconSvgTabSearch
+              color={focused ? Colors.coral : Colors.black_87}
+              size={25}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={screens.PROFILE}
+        component={ProfileScreen}
+        options={{
+          tabBarActiveTintColor: Colors.black,
+          tabBarLabel: 'Аккаунт',
+          tabBarIcon: ({focused}) => (
+            <IconSvgTabProfile
+              color={focused ? Colors.coral : Colors.black_87}
               size={25}
             />
           ),

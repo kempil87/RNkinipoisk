@@ -4,8 +4,8 @@ export const Colors = {
   black: '#000000',
   black_87: 'rgba(0, 0, 0, 0.87)',
   black_54: 'rgba(0, 0, 0, 0.54)',
-  black_70: 'rgba(0, 0, 0, 0.7)',
-  black_30: 'rgba(0, 0, 0, 0.3)',
+  black_65: 'rgba(0, 0, 0, 0.65)',
+  black_30: 'rgba(0, 0, 0, 0.15)',
   light_grey: '#eaede8',
   warm_grey: '#979797',
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const MediaScreen = () => {
+const SearchScreen = () => {
   return (
     <View>
-      <Text>Медиа</Text>
+      <Text>Поиск</Text>
     </View>
   );
 };
 
-export default MediaScreen;
+export default SearchScreen;

@@ -8,19 +8,35 @@ import {
   View,
 } from 'react-native';
 import {IFilmCard} from '../../types/FilmTypes';
+import {Colors} from '../../styles/Colors';
 
 const FilmCard = (props: IFilmCard) => {
   return (
-    <TouchableOpacity onPress={() => props.onPress(props.filmId)}>
-      <Image
-        resizeMode={'cover'}
-        style={styles.imagePoster}
-        source={{uri: props.posterUrl}}
-      />
-      <View style={styles.nameContainer}>
-        <Text style={styles.nameText}>{props.nameRu}</Text>
-      </View>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity onPress={() => props.onPress(props.filmId)}>
+        <Image
+          resizeMode={'cover'}
+          style={styles.imagePoster}
+          source={{uri: props.posterUrl}}
+        />
+        <Text style={+props.rating > 8.3 ? styles.rating : styles.ratingDown}>
+          {props.rating}
+        </Text>
+
+        <View style={styles.nameContainer}>
+          {props.nameRu.length > 15 ? (
+            <Text style={styles.nameText}>{props.nameRu.substr(0, 13)}...</Text>
+          ) : (
+            <Text style={styles.nameText}>{props.nameRu}</Text>
+          )}
+          <Text style={styles.genreText}>{props.genres[0].genre}</Text>
+        </View>
+      </TouchableOpacity>
+
+      {/*{genres.map(i => (*/}
+      {/*  <Text>{i.genre}</Text>*/}
+      {/*))}*/}
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -28,19 +44,48 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 6,
   },
+
   imagePoster: {
-    width: Dimensions.get('window').width * 0.7,
-    height: 160,
-    marginLeft: 12,
-    borderRadius: 14,
+    width: Dimensions.get('window').width * 0.33,
+    height: 200,
+    marginLeft: 2,
+    marginRight: 9,
+    borderRadius: 10,
+    marginTop: 8,
+  },
+  rating: {
+    position: 'absolute',
+    paddingVertical: 1,
+    paddingHorizontal: 6,
+    top: 18,
+    left: 0,
+    color: Colors.white,
+    fontWeight: '700',
+    backgroundColor: Colors.turtle_green,
+    borderRadius: 2,
+  },
+  ratingDown: {
+    position: 'absolute',
+    paddingVertical: 1,
+    paddingHorizontal: 6,
+    top: 18,
+    left: 0,
+    color: Colors.white,
+    fontWeight: '700',
+    backgroundColor: Colors.coral,
+    borderRadius: 2,
   },
   nameContainer: {
-    width: '67%',
+    width: '100%',
   },
   nameText: {
-    marginLeft: 12,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 15,
+    fontWeight: '700',
+    color: Colors.black,
+  },
+  genreText: {
+    color: Colors.black_65,
+    fontSize: 14,
   },
 });
 export default FilmCard;

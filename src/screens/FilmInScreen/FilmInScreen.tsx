@@ -1,5 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  ScrollView,
+} from 'react-native';
 import Navigation from '../../base/Navigation';
 import {useRoute} from '@react-navigation/core';
 import {api} from '../../base/axios/axios';
@@ -21,30 +29,130 @@ const FilmInScreen = () => {
 
   useEffect(() => {
     getFilmInfo();
-  }, [route.params.filmId]);
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => Navigation.pop()}>
-        <Text>Назад</Text>
+    <ScrollView>
+      <TouchableOpacity style={styles.back} onPress={() => Navigation.pop()}>
+        <IconSvgTabBack />
       </TouchableOpacity>
-      <Text style={styles.des}>
-        {showDes ? filmInfo?.description : filmInfo?.shortDescription}
-      </Text>
-      <TouchableOpacity onPress={() => setShowDes(!showDes)}>
-        <Text>Показать полностью</Text>
-      </TouchableOpacity>
-    </View>
+
+      <Image
+        resizeMode={'stretch'}
+        style={styles.imagePoster}
+        source={{uri: filmInfo?.posterUrl}}
+      />
+
+      <View
+        style={{
+          backgroundColor: Colors.black_87,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text style={styles.nameRu}>{filmInfo?.nameRu}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 12,
+          }}>
+          <Text style={styles.rate}>{filmInfo?.ratingKinopoisk}</Text>
+          <Text style={styles.nameOrig}>{filmInfo?.nameOriginal}</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 12,
+          }}>
+          <Text style={styles.rate}>{filmInfo?.year}</Text>
+          {filmInfo && filmInfo?.genres?.length > 0 && (
+            <Text style={styles.rate}>
+              {filmInfo?.genres?.map(i => i.genre).join(', ')}
+            </Text>
+          )}
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 12,
+            marginBottom: 15,
+          }}>
+          {filmInfo && filmInfo?.countries.length > 0 && (
+            <Text style={styles.rate}>
+              {filmInfo?.countries?.map(i => i.country).join(', ')}
+            </Text>
+          )}
+          <Text style={styles.rate}>
+            ,{filmInfo?.ratingAgeLimits.substr(3)} +
+          </Text>
+        </View>
+      </View>
+      <View>
+        <Text style={styles.des}>
+          {showDes ? (
+            <Text>
+              {filmInfo?.description}
+              <TouchableOpacity onPress={() => setShowDes(!showDes)}>
+                <Text
+                  style={{fontSize: 14, textAlign: 'center', marginLeft: 6}}>
+                  Убрать
+                </Text>
+              </TouchableOpacity>
+            </Text>
+          ) : (
+            <Text>
+              {filmInfo?.shortDescription}
+              <TouchableOpacity onPress={() => setShowDes(!showDes)}>
+                <Text style={{fontSize: 14}}>Показать полностью </Text>
+              </TouchableOpacity>
+            </Text>
+          )}
+        </Text>
+      </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingTop: 6,
   },
-  des: {
+  back: {
+    marginTop: 15,
+    position: 'absolute',
+    zIndex: 50,
+  },
+  imagePoster: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height * 0.67,
+  },
+  backgroundPoster: {
+    width: '100%',
+    height: 120,
+    backgroundColor: Colors.black,
+  },
+  nameRu: {
+    marginTop: 8,
+    alignItems: 'center',
+    textAlign: 'center',
     fontSize: 16,
-    fontWeight: '600',
+    fontStyle: 'italic',
+    color: Colors.white,
+    fontWeight: '500',
+  },
+  rate: {
+    fontSize: 14,
+    color: Colors.gray300,
+    marginRight: 8,
+  },
+  nameOrig: {
+    fontSize: 14,
+    color: Colors.white,
+  },
+  des: {
+    padding: 15,
+    fontSize: 16,
+    fontWeight: '800',
     color: Colors.black_54,
   },
 });

@@ -6,6 +6,7 @@ export interface Film {
   year: string;
   genres: FilmGenres[];
   countries: FilmCountry[];
+  ratingAgeLimits: string;
 }
 
 export interface FilmCountry {
@@ -16,13 +17,15 @@ export interface FilmGenres {
   genre: string;
 }
 
-export interface IFilmCard extends Film {
+export interface IFilmCard extends FilmInfo {
   onPress: (filmId: number) => void;
 }
+export interface IFilmInCard extends FilmInfo {}
 
 export interface FilmInfo extends Film {
   description: string;
   shortDescription: string;
   webUrl: string;
   nameOriginal: string;
+  ratingKinopoisk?: string;
 }

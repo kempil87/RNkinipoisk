@@ -9,15 +9,23 @@ import {
 } from 'react-native';
 import {IFilmCard} from '../../types/FilmTypes';
 import {Colors} from '../../styles/Colors';
+import Navigation from '../../base/Navigation';
+import {screens} from '../../navigation/screens';
 
-const FilmCard = (props: IFilmCard) => {
+const FilmCardInStaff = (props: IFilmCard) => {
+  const goToFilmInStaff = (filmId: number) => {
+    Navigation.navigate(screens.FILM_IN, {filmId});
+  };
+
   return (
     <View style={styles.filmCardWrap}>
-      <TouchableOpacity onPress={() => props.onPress(props?.filmId)}>
+      <TouchableOpacity onPress={() => goToFilmInStaff(props.filmId)}>
         <Image
           resizeMode={'cover'}
           style={styles.imagePoster}
-          source={{uri: props?.posterUrl}}
+          source={{
+            uri: 'https://play-lh.googleusercontent.com/5czw6iycA8YhjI653GQdwnnmu8NNzEMXV32gZKoVCYZV6PQUAv_YV0uJ2PU1E-Jm9PE',
+          }}
         />
 
         {props?.rating && (
@@ -98,4 +106,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default FilmCard;
+export default FilmCardInStaff;

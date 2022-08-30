@@ -2,7 +2,7 @@ import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 import {Colors} from '../../styles/Colors';
 
-export const IconSvgTabBack = () => {
+export const IconSvgBack = () => {
   return (
     <Svg width={30} height={25} viewBox="0 0 512 512">
       <Path

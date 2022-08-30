@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
-import {IIcon} from '../../base/types/BaseTypes';
+import {IIcon} from '../../../base/types/BaseTypes';
 
 export const IconSvgTabProfile = ({color, size}: IIcon) => {
   return (

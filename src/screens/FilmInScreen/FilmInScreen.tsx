@@ -13,7 +13,7 @@ import {useRoute} from '@react-navigation/core';
 import {api} from '../../base/axios/axios';
 import {FilmInfo} from '../../types/FilmTypes';
 import {Colors} from '../../styles/Colors';
-import {IconSvgTabBack} from '../../assets/Icons/IconSvgTabBack';
+import {IconSvgBack} from '../../assets/Icons/IconSvgBack';
 
 const FilmInScreen = () => {
   const route: any = useRoute();
@@ -34,7 +34,7 @@ const FilmInScreen = () => {
   return (
     <ScrollView>
       <TouchableOpacity style={styles.back} onPress={() => Navigation.pop()}>
-        <IconSvgTabBack />
+        <IconSvgBack />
       </TouchableOpacity>
 
       <Image
@@ -74,6 +74,7 @@ const FilmInScreen = () => {
         <View
           style={{
             flexDirection: 'row',
+            alignItems: 'center',
             marginTop: 12,
             marginBottom: 15,
           }}>
@@ -82,8 +83,8 @@ const FilmInScreen = () => {
               {filmInfo?.countries?.map(i => i.country).join(', ')}
             </Text>
           )}
-          <Text style={styles.rate}>
-            ,{filmInfo?.ratingAgeLimits.substr(3)} +
+          <Text style={styles.ageLimit}>
+            {filmInfo?.ratingAgeLimits.substr(3)} +
           </Text>
         </View>
       </View>
@@ -148,6 +149,15 @@ const styles = StyleSheet.create({
   nameOrig: {
     fontSize: 14,
     color: Colors.white,
+  },
+  ageLimit: {
+    fontSize: 14,
+    color: Colors.gray300,
+    marginRight: 8,
+    borderWidth: 1,
+    borderColor: Colors.gray300,
+    padding: 4,
+    borderRadius: 6,
   },
   des: {
     padding: 15,

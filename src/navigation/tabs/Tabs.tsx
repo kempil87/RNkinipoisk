@@ -6,12 +6,12 @@ import Navigation from '../../base/Navigation';
 import {screens} from '../screens';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import MediaScreen from '../../screens/MediaScreen/MediaScreen';
-import {IconSvgTabHome} from '../../assets/Icons/IconSvgTabHome';
-import {IconSvgTabMedia} from '../../assets/Icons/IconSvgTabMedia';
+import {IconSvgTabHome} from '../../assets/Icons/tab/IconSvgTabHome';
+import {IconSvgTabMedia} from '../../assets/Icons/tab/IconSvgTabMedia';
 import SearchScreen from '../../screens/SearchScreen/SearchScreen';
 import ProfileScreen from '../../screens/ProfileScreen/ProfileScreen';
-import {IconSvgTabProfile} from '../../assets/Icons/IconSvgTabProfile';
-import {IconSvgTabSearch} from '../../assets/Icons/IconSvgTabSearch';
+import {IconSvgTabProfile} from '../../assets/Icons/tab/IconSvgTabProfile';
+import {IconSvgTabSearch} from '../../assets/Icons/tab/IconSvgTabSearch';
 
 const Tab = createBottomTabNavigator();
 

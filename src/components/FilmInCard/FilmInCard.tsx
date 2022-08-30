@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  Dimensions,
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import {IFilmInCard} from '../../types/FilmTypes';
 

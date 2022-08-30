@@ -14,9 +14,16 @@ import {IconSvgPlus} from '../../assets/Icons/IconSvgPlus';
 import {IconSvgGift} from '../../assets/Icons/IconSvgGift';
 import {ButtonPlus} from '../../components/ui/ButtonPlus';
 import {IconSvgArrowRight} from '../../assets/Icons/IconSvgArrowRight';
+import navigation from '../../base/Navigation';
+import {screens} from '../../navigation/screens';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getToken} from '../../store/slices/authSlice';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 
 const ProfileScreen = () => {
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const userNumber = useAppSelector(state => state.authReducer.token);
 
   const uploadPhoto = async () => {
     const res = await DocumentPicker.pick({
@@ -26,6 +33,11 @@ const ProfileScreen = () => {
     if (res.length > 0 && res[0].uri) {
       setUserPhoto(res[0].uri);
     }
+  };
+
+  const logout = async () => {
+    await AsyncStorage.clear();
+    dispatch(getToken(''));
   };
 
   return (
@@ -41,7 +53,9 @@ const ProfileScreen = () => {
       </View>
 
       <View style={{marginTop: 16}}>
-        <Text style={styles.name}>Глеб Макаров - 9507</Text>
+        <Text style={styles.name}>
+          Глеб Макаров - 9507 {'\n'} {userNumber}
+        </Text>
       </View>
 
       <TouchableOpacity style={styles.addProfileContainer}>
@@ -67,7 +81,13 @@ const ProfileScreen = () => {
         </Text>
       </View>
 
-      <ButtonPlus onPress={() => {}} top={42} text={'Оформить'} />
+      <ButtonPlus
+        onPress={() => {
+          navigation.navigate(screens.CREATE_PROFILE);
+        }}
+        top={42}
+        text={'Оформить'}
+      />
 
       <TouchableOpacity style={[styles.promoCodeContainer, {marginTop: 48}]}>
         <IconSvgGift color={Colors.black} size={18} />
@@ -107,7 +127,7 @@ const ProfileScreen = () => {
       </View>
 
       <View style={{marginVertical: 32}}>
-        <TouchableOpacity style={styles.exit}>
+        <TouchableOpacity onPress={logout} style={styles.exit}>
           <Text style={styles.exitText}>Выйти из аккаунта</Text>
         </TouchableOpacity>
       </View>
@@ -140,7 +160,7 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     color: Colors.black,
   },

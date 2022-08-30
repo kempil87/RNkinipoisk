@@ -1,5 +1,5 @@
 export const appConfig = {
-  key: 'd5ca9119-ceb2-4cea-987d-2b13f05e3bc6',
+  key: 'e08875a9-5fe9-4b67-81bb-bfb8a841c459',
   BASE_URL: 'https://kinopoiskapiunofficial.tech/api',
   BASE_URL2: 'https://kinopoiskapiunofficial.tech/api2',
 };
